@@ -1,0 +1,175 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "CSTOL procedure language",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#todo-comments"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#cstol-keywords"
+		},
+		{
+			"include": "#variables-labels"
+		},
+		{
+			"include": "#units"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"begin": ";",
+					"beginCaptures": {
+						"0":{
+							"name": "punctuation.definition.comment.prc"
+						}
+					},
+					"end": "\\n",
+					"name": "comment.line.number-sign.prc"
+				},
+				{
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.prc"
+						}
+					},
+					"match": ";\\*\\*;",
+					"name": "comment.block.empty.prc"
+				},
+				{
+					"include": "#comments-inline"
+				},
+				{
+					"include": "#todo-comments"
+				}
+			]
+		},
+		"comments-inline": {
+			"patterns": [
+				{
+					"begin": ";\\*",
+					"captures": {
+						"name": "punctuation.definition.comment.prc"
+					},
+					"end": "\\*;",
+					"name": "comment.block.prc"
+				},
+				{
+					"include": "#todo-comments"
+				}
+			]
+		},
+		"todo-comments":{
+			"name": "comment.line.number-sign.prc",
+			"match": "(TODO|TBC|TBD)",
+			"captures": {
+				"0": {
+					"name": "keyword.codetag.notation.prc"
+				}
+			},
+			"begin": "\\b",
+			"end": "\\b",
+			"decorations": {
+				"background": "#FFFF00",
+				"fontStyle": "bold"
+			}
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.prc",
+				"match": "\\b(if|else|elseif|endif|loop|endloop|for|proc|endproc|begin|return|escape)\\b"
+			}]
+		},
+		"cstol-keywords": {
+			"patterns": [
+				{
+					"match": "\\b(write|printf)\\b",
+					"name": "entity.name.function.member.prc"
+				},
+				{
+					"match": "\\b(cmd|ask|check|goto|let|wait|return|with|declare|variable|start|macro)\\b",
+					"name": "entity.name.type.prc"
+				},
+				{
+					"name": "entity.name.function.member.prc",
+					"match": "\\b(or|and)\\b"
+				}
+			]
+		},
+		"variables-labels": {
+			"patterns": [
+				{
+					"name": "entity.name.function.preprocessor.prc",
+					"match": "\\$\\$\\w+"
+				},
+				{
+					"name": "variable.other.local.prc",
+					"match": "\\$\\w+"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+    				"match": "\\d{2}:\\d{2}:\\d{2}"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+    				"match": "[A-Z0-9_]+:"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+					"match": "(?<=goto\\s)\\w+"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+					"match": "\\b(RAW)\\b"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+					"match": "x#[0-9a-fA-F]+\\s*(DN|A|C|V)?\\b"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+					"match": "[bodhBODH]#"
+				},
+				{
+					"name": "entity.name.type.prc",
+					"match": "%[xbodhXBODH]"
+				}
+				
+		]
+		},
+		"units": {
+			"patterns": [
+				{
+					"name": "entity.name.function.preprocessor.prc",
+    				"match": "\\b(\\d+\\.?\\d*\\s*(DN|C|A|V))\\b"
+				},
+				{
+					"name": "entity.name.function.preprocessor.prc",
+    				"match": "\\b\\d+(\\.\\d*)?\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.prc",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.prc",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.prc"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "prc",
+  "displayName": "prc",
+  "description": "CSTOL procedure language",
+  "version": "1.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "prc",
+      "aliases": ["CSTOL procedure language", "prc"],
+      "extensions": [".prc"],
+      "configuration": "./language-configuration.json",
+      "icon": {
+        "light": "./icon/imap.png",
+        "dark": "./icon/imap_dark.png"
+      }
+    }],
+    "grammars": [{
+      "language": "prc",
+      "scopeName": "source.prc",
+      "path": "./syntaxes/prc.tmLanguage.json"
+    }]
+  }
+}
